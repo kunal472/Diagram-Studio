@@ -1,0 +1,47 @@
+<div class="min-h-screen flex flex-col bg-[#0b0f19] text-slate-100 selection:bg-indigo-500 selection:text-white">
+  
+  <!-- Global Top Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Routing Container -->
+  <main class="flex-1">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Global Toast Notification -->
+  <div *ngIf="studioService.notification() as notif" 
+       class="fixed bottom-6 right-6 z-50 animate-bounce-short">
+    <div class="px-5 py-3 rounded-2xl shadow-2xl backdrop-blur-xl border flex items-center space-x-3 text-sm font-medium transition-all"
+         [class.bg-emerald-950_80]="notif.type === 'success'"
+         [class.border-emerald-500_40]="notif.type === 'success'"
+         [class.text-emerald-200]="notif.type === 'success'"
+         [class.bg-rose-950_80]="notif.type === 'error'"
+         [class.border-rose-500_40]="notif.type === 'error'"
+         [class.text-rose-200]="notif.type === 'error'"
+         [class.bg-indigo-950_80]="notif.type === 'info'"
+         [class.border-indigo-500_40]="notif.type === 'info'"
+         [class.text-indigo-200]="notif.type === 'info'">
+      
+      <span *ngIf="notif.type === 'success'" class="text-emerald-400">✓</span>
+      <span *ngIf="notif.type === 'error'" class="text-rose-400">✕</span>
+      <span *ngIf="notif.type === 'info'" class="text-indigo-400">ℹ</span>
+      
+      <span>{{ notif.message }}</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>Dynamic Interactive Diagram & Flowchart Studio • Powered by Java 21 & Angular 18+</p>
+      <div class="flex items-center space-x-4">
+        <span>PostgreSQL pgvector</span>
+        <span>•</span>
+        <span>Google Gemini AI</span>
+        <span>•</span>
+        <span>Mermaid.js SVG</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
