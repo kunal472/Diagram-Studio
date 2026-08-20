@@ -1,0 +1,12 @@
+# Dockerfile for PostgreSQL with pgvector extension
+FROM ankane/pgvector:latest
+
+# Environment variables matching application.yml defaults
+ENV POSTGRES_DB=studiodb
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgrespassword
+
+# Copy initial SQL schema migration into Postgres startup folder
+COPY src/main/resources/db/migration/schema.sql /docker-entrypoint-initdb.d/01_schema.sql
+
+EXPOSE 5432

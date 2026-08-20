@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: studio-backend
+  config:
+    import:
+      - optional:classpath:secrets.yml
+      - optional:file:secrets.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/studiodb
+    username: postgres
+    password: postgrespassword
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+gemini:
+  api-key: ${GEMINI_API_KEY:${gemini.api-key:}}
+  model: ${GEMINI_MODEL:gemini-2.5-flash-lite}
+  base-url: https://generativelanguage.googleapis.com/v1beta
